@@ -10,6 +10,8 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
     @book = Book.new
+    
+    @currentpath = request.path
   end
 
   def create
