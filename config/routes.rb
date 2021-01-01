@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   
   resources :books do
     resource :favorites, only: [:create, :destroy]
+    resource :comments, only: [:create, :destroy]
   end
   
   root 'homes#top'
