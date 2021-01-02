@@ -6,11 +6,8 @@ class BooksController < ApplicationController
     @user = @showbook.user
     @book = Book.new
     @comment = BookComment.new
-    
-    # p @showbook
-    # p BookComment.all
-    # p @user.books
-    p @showbook.book_comments
+    @comments = @showbook.book_comments
+    p @comments
   end
 
   def index
