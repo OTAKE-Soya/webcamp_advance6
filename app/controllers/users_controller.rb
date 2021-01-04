@@ -5,11 +5,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
+    @set_relationship = current_user.active_relationships.new
+    @relationsip = current_user.active_relationships.find_by(followed_id: @user.id)
   end
 
   def index
     @users = User.all
     @book = Book.new
+    @set_relationship = current_user.active_relationships.new
+    @relationsips = current_user.active_relationships
   end
 
   def edit
@@ -23,6 +27,14 @@ class UsersController < ApplicationController
       # @user = User.find(params[:id])
       render :edit
     end
+  end
+  
+  def following
+    @user = User.find(params[:id])
+  end
+  
+  def followers
+    @user = User.find(params[:id])
   end
 
   private

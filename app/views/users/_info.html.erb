@@ -21,7 +21,7 @@
 <% if current_user != user %>
   <% if current_user.following?(user) %>
     <div class="row" >
-      <%= link_to "Unfollow", users_path, class: "btn btn-danger" %>
+      <%= link_to "Unfollow", users_path, class: "btn btn-info" %>
     </div>
   <% else %>
     <div class="row" >
