@@ -18,7 +18,8 @@
             <% if current_user.following?(user) %>
               <%= form_with model: set_relationship, url: relationships_path, local: true do |f| %>
                 <%= f.hidden_field :follow_id, value: user.id %>
-                <%= f.submit "Unollow" %>
+                <%= f.submit "Unfollow" %>
+              <% end %>
             <% else %>
               <%= form_with model: set_relationship, url: relationships_path, local: true do |f| %>
                 <%= f.hidden_field :follow_id, value: user.id %>
