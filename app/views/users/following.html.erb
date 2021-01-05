@@ -3,6 +3,6 @@
   <% if @user.following.count == 0 %>
     <p>No following users</p>
   <% else %>
-    <%= render 'index',users: @user.following %>
+    <%= render 'index', users: @users, set_relationship: @set_relationship, relationships: @relationships %>
   <% end %>
 </div>

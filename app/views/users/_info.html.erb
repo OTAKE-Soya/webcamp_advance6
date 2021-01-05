@@ -10,25 +10,28 @@
   </tr>
   <tr>
     <th>follows</th>
-    <th><%= user.following.count %></th>
+    <th><%= link_to user.following.count, following_user_path(user.id) %></th>
   </tr>
   <tr>
     <th>followers</th>
-    <th><%= user.followers.count %></th>
+    <th><%= link_to user.followers.count, followers_user_path(user.id) %></th>
   </tr>
 </table>
 
-<% if current_user != user %>
-  <% if current_user.following?(user) %>
-    <div class="row" >
-      <%= link_to "Unfollow", users_path, class: "btn btn-info" %>
-    </div>
-  <% else %>
-    <div class="row" >
-      <%= link_to "Follow", users_path, class: "btn btn-success" %>
-    </div>
+  <% if current_user != user %>
+    <% if current_user.following?(user) %>
+      <% relationship = relationships.find_by(followed_id: user.id)%>
+      <%= form_with model: relationship, method: :delete, local: true do |f| %>
+        <%= f.hidden_field :followed_id, value: user.id %>
+        <%= f.submit "Unfollow" %>
+      <% end %>
+    <% else %>
+      <%= form_with model: set_relationship, url: relationships_path, local: true do |f| %>
+        <%= f.hidden_field :follow_id, value: user.id %>
+        <%= f.submit "Follow" %>
+      <% end %>
+    <% end %>
   <% end %>
-<% end %>
 
 <% if current_user == user %>
   <div class='row'>

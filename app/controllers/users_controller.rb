@@ -6,14 +6,16 @@ class UsersController < ApplicationController
     @books = @user.books
     @book = Book.new
     @set_relationship = current_user.active_relationships.new
-    @relationsip = current_user.active_relationships.find_by(followed_id: @user.id)
+    @relationships = current_user.active_relationships
   end
 
   def index
     @users = User.all
     @book = Book.new
     @set_relationship = current_user.active_relationships.new
-    @relationsips = current_user.active_relationships
+    @relationships = current_user.active_relationships
+    p "aaaaaaaaaaaaaaa"
+    p current_user.active_relationships.all
   end
 
   def edit
@@ -31,10 +33,16 @@ class UsersController < ApplicationController
   
   def following
     @user = User.find(params[:id])
+    @users = @user.following
+    @set_relationship = current_user.active_relationships.new
+    @relationships = current_user.active_relationships
   end
   
   def followers
     @user = User.find(params[:id])
+    @users = @user.followers
+    @set_relationship = current_user.active_relationships.new
+    @relationships = current_user.active_relationships
   end
 
   private
