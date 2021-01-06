@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     member do
       get :following, :followers 
     end
+    resource :relationships, only: [:create, :destroy]
   end
   
   resources :books do
@@ -12,7 +13,9 @@ Rails.application.routes.draw do
     resources :book_comments, only: [:create, :destroy]
   end
   
-  resources :relationships, only: [:create, :destroy]
+  
+  
+  get "search" => "search#search"
   
   root 'homes#top'
   get 'home/about' => 'homes#about'

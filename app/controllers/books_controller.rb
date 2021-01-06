@@ -7,7 +7,8 @@ class BooksController < ApplicationController
     @book = Book.new
     @comment = BookComment.new
     @comments = @showbook.book_comments
-    p @comments
+    @set_relationship = current_user.active_relationships.new
+    @relationships = current_user.active_relationships
   end
 
   def index

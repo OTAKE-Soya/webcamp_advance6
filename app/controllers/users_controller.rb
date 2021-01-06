@@ -14,8 +14,6 @@ class UsersController < ApplicationController
     @book = Book.new
     @set_relationship = current_user.active_relationships.new
     @relationships = current_user.active_relationships
-    p "aaaaaaaaaaaaaaa"
-    p current_user.active_relationships.all
   end
 
   def edit

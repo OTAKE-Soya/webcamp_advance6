@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Following Users</h1>
+  <h1><%=@user.name%>'s Following Users</h1>
   <% if @user.following.count == 0 %>
     <p>No following users</p>
   <% else %>
