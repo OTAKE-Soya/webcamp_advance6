@@ -29,4 +29,16 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
+  
+  def self.search(pattern, word)
+    if pattern == "exact"
+      where(name: word)
+    elsif pattern == "forword"
+      where("name like ?", "#{word}%")
+    elsif pattern == "backword"
+      where("name like ?", "%#{word}")
+    elsif pattern == "partial"
+      where("name like ?", "%#{word}%")
+    end
+  end
 end

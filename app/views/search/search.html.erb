@@ -1,1 +1,7 @@
-aaaaa
+<h2><%= params[:target].capitalize %>s search for "<%= params[:body] %>"</h2>
+
+<% if params[:target] == "user" %>
+  <%= render "users/index", users: @users %>
+<% else %>
+  <%= render "books/index", books: @books %>
+<% end %>
