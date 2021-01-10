@@ -1,12 +1,11 @@
 class BookCommentsController < ApplicationController
   def create
-    @comment = BookComment.new(comment_params)
-    @comment.user_id = current_user.id
+    comment = BookComment.new(comment_params)
+    comment.user_id = current_user.id
     @showbook = Book.find(params[:book_id])
-    @comment.book_id = @showbook.id
-    if @comment.save
-      redirect_to request.referer
-    else
+    comment.book_id = @showbook.id
+    unless comment.save
+      # redirect_to request.referer
       @user = @showbook.user
       @book = Book.new
       render "books/show"
@@ -14,12 +13,13 @@ class BookCommentsController < ApplicationController
   end
   
   def destroy
-    @comment = BookComment.find(params[:id])
-    if @comment.user != current_user
-      redirect_to book_path(@comment.book)
+    comment = BookComment.find(params[:id])
+    @showbook = Book.find(comment.book_id)
+    if comment.user != current_user
+      redirect_to book_path(comment.book)
     end
-    @comment.destroy
-    redirect_to book_path(@comment.book)
+    comment.destroy
+    # redirect_to book_path(comment.book)
   end
   
   private
