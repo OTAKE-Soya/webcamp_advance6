@@ -1,0 +1,20 @@
+<% if comments %>
+  <table>
+    <% comments.each do |comment| %>
+      <tr>
+        <td>
+          <div>
+            <%= attachment_image_tag(comment.user, :profile_image, :fill, 100, 100, fallback: "no-image-icon.jpg") %>                  
+          </div>
+          <div>
+            <%= link_to comment.user.name, user_path(comment.user) %>
+          </div>
+        </td>
+        <td><%= comment.comment %></td>
+        <% if comment.user == current_user %>
+          <td><%= link_to "Destroy", book_book_comment_path(comment.book, comment), method: :delete, class: "btn btn-danger" %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
